@@ -1,3 +1,6 @@
+# Firebase configuration
+google-services.json
+
 # Miscellaneous
 *.class
 *.log
