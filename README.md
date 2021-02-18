@@ -6,4 +6,6 @@ Our solution is provide these students an interactive and enjoyable learning pla
 
 ## Notes
 We need to use zeplin.  
-Font is not added yet (Poppins)
+Font is not added yet (Poppins).  
+Merge sign in with sign up using enum.  
+Update WelcomePage image.   
