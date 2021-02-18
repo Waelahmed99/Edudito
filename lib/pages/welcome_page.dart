@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'sign_in_page.dart';
+import 'sign_up_page.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -55,14 +57,16 @@ class WelcomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildContainerButton(
+                    context,
                     text: 'Sign In',
                     color: Color(0xffF8DE44),
-                    onTap: null,
+                    navigatePage: SignInPage(),
                   ),
                   _buildContainerButton(
+                    context,
                     text: 'Sign Up',
                     color: Color(0xffffffff),
-                    onTap: null,
+                    navigatePage: SignUpPage(),
                   ),
                 ],
               )),
@@ -72,9 +76,12 @@ class WelcomePage extends StatelessWidget {
     );
   }
 
-  Widget _buildContainerButton({String text, Function onTap, Color color}) {
+  Widget _buildContainerButton(context,
+      {String text, var navigatePage, Color color}) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => navigatePage,
+      )),
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 42, vertical: 10),
         decoration: BoxDecoration(
