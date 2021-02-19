@@ -1,6 +1,7 @@
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:flutter/material.dart';
+import '../widgets/no_glow_behavior.dart';
 
 enum Auth { SignIn, SignUp }
 
@@ -43,10 +44,7 @@ class _AuthPageState extends State<AuthPage> {
             SizedBox(height: 100),
             Text(
               isSignIn ? Strings.signInMessage : Strings.signUpMessage,
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.white,
-              ),
+              style: TextStyle(fontSize: 24, color: Colors.white),
             ),
             SizedBox(height: 30),
             Expanded(child: _buildForm(context)),
@@ -69,24 +67,32 @@ class _AuthPageState extends State<AuthPage> {
           topLeft: Radius.circular(35),
         ),
       ),
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          SizedBox(height: 60),
-          for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
-          SizedBox(height: 16),
-          _buildAuthButton(
-              text: 'Sign In', fillColor: StyleGuide.secondaryColor),
-          SizedBox(height: 10),
-          _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
-          Expanded(
-            child: Container(
-              padding: EdgeInsets.only(bottom: 25),
-              alignment: Alignment.bottomCenter,
-              child: _buildChangeAuth(),
+      child: ScrollConfiguration(
+        behavior: NoGlowBehaviour(),
+        child: SingleChildScrollView(
+          child: Container(
+            height: MediaQuery.of(context).size.height - 170,
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                SizedBox(height: 60),
+                for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
+                SizedBox(height: 16),
+                _buildAuthButton(
+                    text: 'Sign In', fillColor: StyleGuide.secondaryColor),
+                SizedBox(height: 10),
+                _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(bottom: 25),
+                    alignment: Alignment.bottomCenter,
+                    child: _buildChangeAuth(),
+                  ),
+                ),
+              ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
