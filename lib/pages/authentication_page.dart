@@ -15,9 +15,13 @@ class AuthPage extends StatefulWidget {
 
 class _AuthPageState extends State<AuthPage> {
   Auth state;
+  List<String> labels;
+  List<String> mapKeys;
 
   @override
   void initState() {
+    labels = ['Email', 'Password', 'Confirm password'];
+    mapKeys = ['email', 'password', 'repassword'];
     state = widget.initialAuth;
     super.initState();
   }
@@ -54,8 +58,10 @@ class _AuthPageState extends State<AuthPage> {
 
   Widget _buildForm(context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30),
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -64,11 +70,116 @@ class _AuthPageState extends State<AuthPage> {
         ),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(height: 60),
-          Text(isSignIn ? Strings.signIn : Strings.signUp),
+          for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
+          SizedBox(height: 16),
+          _buildAuthButton(
+              text: 'Sign In', fillColor: StyleGuide.secondaryColor),
+          SizedBox(height: 10),
+          _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(bottom: 25),
+              alignment: Alignment.bottomCenter,
+              child: _buildChangeAuth(),
+            ),
+          ),
         ],
       ),
+    );
+  }
+
+  Widget _buildChangeAuth() {
+    return GestureDetector(
+      onTap: () => changeAuthState(),
+      child: RichText(
+        text: new TextSpan(
+          style: new TextStyle(fontSize: 14.0, color: Colors.black),
+          children: <TextSpan>[
+            new TextSpan(
+                text:
+                    isSignIn ? Strings.switchToSignUp : Strings.switchtoSignIn),
+            new TextSpan(
+                text: '  ${isSignIn ? Strings.signUp : Strings.signIn}',
+                style: new TextStyle(
+                    color: StyleGuide.accentColor,
+                    fontWeight: FontWeight.bold)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAuthButton({Function onTap, String text, Color fillColor}) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.center,
+        height: 45,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(25),
+          color: fillColor,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 0,
+              blurRadius: 4,
+              offset: Offset(1, 3),
+            ),
+          ],
+        ),
+        child: Text(text,
+            style: TextStyle(
+              color: StyleGuide.mainColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            )),
+      ),
+    );
+  }
+
+  Widget _buildTextField(int idx) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Container(
+          padding: EdgeInsets.only(left: 10),
+          child: Text(
+            labels[idx],
+            style: TextStyle(fontSize: 13, color: StyleGuide.mainColor),
+          ),
+        ),
+        Container(
+          height: 45,
+          padding: EdgeInsets.only(bottom: 10),
+          decoration: BoxDecoration(
+            color: Color(0xffF1F1F2),
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 0,
+                blurRadius: 4,
+                offset: Offset(1, 3),
+              ),
+            ],
+          ),
+          child: TextFormField(
+            decoration: new InputDecoration(
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent, width: 18.0),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.transparent, width: 18.0),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 10),
+      ],
     );
   }
 }
