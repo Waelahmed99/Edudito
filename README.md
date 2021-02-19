@@ -9,5 +9,5 @@ We need to use zeplin.
 Font is not added yet (Poppins).  
 Merge sign in with sign up using enum.  
 Update WelcomePage image.   
-Add StyleGuide.
+Add StyleGuide.  
 Add Theme.  
