@@ -22,7 +22,7 @@ class _AuthPageState extends State<AuthPage> {
 
   get isSignIn => state == Auth.SignIn;
 
-  void changeState() =>
+  void changeAuthState() =>
       setState(() => state = (isSignIn ? Auth.SignUp : Auth.SignIn));
 
   @override
