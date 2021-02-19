@@ -1,5 +1,7 @@
+import 'package:Edudito/helpers/style_guide.dart';
 import 'package:flutter/material.dart';
 import 'authentication_page.dart';
+import '../helpers/strings.dart';
 
 class WelcomePage extends StatelessWidget {
   @override
@@ -11,7 +13,7 @@ class WelcomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              'Edudito',
+              Strings.appName,
               style: TextStyle(
                 fontSize: 30,
                 color: Color(0xff07225E),
@@ -30,7 +32,7 @@ class WelcomePage extends StatelessWidget {
       padding: EdgeInsets.only(left: 33, right: 16),
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        color: Color(0xff07225E),
+        color: StyleGuide.mainColor,
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(30),
           topLeft: Radius.circular(30),
@@ -46,7 +48,7 @@ class WelcomePage extends StatelessWidget {
           ),
           SizedBox(height: 24),
           Text(
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.',
+            Strings.welcomeMessage,
             style: TextStyle(fontSize: 14, color: Colors.white),
           ),
           SizedBox(height: 50),
@@ -57,14 +59,14 @@ class WelcomePage extends StatelessWidget {
                 children: [
                   _buildContainerButton(
                     context,
-                    text: 'Sign In',
-                    color: Color(0xffF8DE44),
+                    text: Strings.signIn,
+                    color: StyleGuide.secondaryColor,
                     state: Auth.SignIn,
                   ),
                   _buildContainerButton(
                     context,
-                    text: 'Sign Up',
-                    color: Color(0xffffffff),
+                    text: Strings.signUp,
+                    color: Colors.white,
                     state: Auth.SignUp,
                   ),
                 ],

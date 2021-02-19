@@ -1,3 +1,5 @@
+import 'package:Edudito/helpers/strings.dart';
+import 'package:Edudito/helpers/style_guide.dart';
 import 'package:flutter/material.dart';
 
 enum Auth { SignIn, SignUp }
@@ -30,13 +32,13 @@ class _AuthPageState extends State<AuthPage> {
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
-        color: Color(0xff07225E),
+        color: StyleGuide.mainColor,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             SizedBox(height: 100),
             Text(
-              isSignIn ? 'Welcome back' : 'Let\'s start!',
+              isSignIn ? Strings.signInMessage : Strings.signUpMessage,
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.white,
@@ -64,7 +66,7 @@ class _AuthPageState extends State<AuthPage> {
       child: Column(
         children: [
           SizedBox(height: 60),
-          Text(isSignIn ? 'Sign In' : 'Sign up'),
+          Text(isSignIn ? Strings.signIn : Strings.signUp),
         ],
       ),
     );
