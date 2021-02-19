@@ -18,11 +18,13 @@ class _AuthPageState extends State<AuthPage> {
   Auth state;
   List<String> labels;
   List<String> mapKeys;
+  Map<String, String> authData;
 
   @override
   void initState() {
     labels = ['Email', 'Password', 'Confirm password'];
     mapKeys = ['email', 'password', 'repassword'];
+    authData = {};
     state = widget.initialAuth;
     super.initState();
   }
@@ -79,7 +81,8 @@ class _AuthPageState extends State<AuthPage> {
                 for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
                 SizedBox(height: 16),
                 _buildAuthButton(
-                    text: 'Sign In', fillColor: StyleGuide.secondaryColor),
+                    text: isSignIn ? Strings.signIn : Strings.signUp,
+                    fillColor: StyleGuide.secondaryColor),
                 SizedBox(height: 10),
                 _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
                 Expanded(
@@ -182,6 +185,7 @@ class _AuthPageState extends State<AuthPage> {
                 borderSide: BorderSide(color: Colors.transparent, width: 18.0),
               ),
             ),
+            onChanged: (value) => authData[mapKeys[idx]] = value,
           ),
         ),
         SizedBox(height: 10),
