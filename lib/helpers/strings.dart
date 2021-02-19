@@ -1,6 +1,7 @@
 class Strings {
   // main strings
   static final String appName = 'Edudito';
+  static final String fontFamily = 'Poppins';
 
   // Welcome|auth strings
   static final String welcomeMessage =
