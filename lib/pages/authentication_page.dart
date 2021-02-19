@@ -1,6 +1,30 @@
 import 'package:flutter/material.dart';
 
-class SignInPage extends StatelessWidget {
+enum Auth { SignIn, SignUp }
+
+class AuthPage extends StatefulWidget {
+  final Auth initialAuth;
+
+  const AuthPage(this.initialAuth);
+
+  @override
+  _AuthPageState createState() => _AuthPageState();
+}
+
+class _AuthPageState extends State<AuthPage> {
+  Auth state;
+
+  @override
+  void initState() {
+    state = widget.initialAuth;
+    super.initState();
+  }
+
+  get isSignIn => state == Auth.SignIn;
+
+  void changeState() =>
+      setState(() => state = (isSignIn ? Auth.SignUp : Auth.SignIn));
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,21 +36,21 @@ class SignInPage extends StatelessWidget {
           children: [
             SizedBox(height: 100),
             Text(
-              'Welcome back',
+              isSignIn ? 'Welcome back' : 'Let\'s start!',
               style: TextStyle(
                 fontSize: 24,
                 color: Colors.white,
               ),
             ),
             SizedBox(height: 30),
-            Expanded(child: _buildSignInForm(context)),
+            Expanded(child: _buildForm(context)),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildSignInForm(context) {
+  Widget _buildForm(context) {
     return Container(
       alignment: Alignment.center,
       width: MediaQuery.of(context).size.width,
@@ -40,7 +64,7 @@ class SignInPage extends StatelessWidget {
       child: Column(
         children: [
           SizedBox(height: 60),
-          Text('Implement form'),
+          Text(isSignIn ? 'Sign In' : 'Sign up'),
         ],
       ),
     );
