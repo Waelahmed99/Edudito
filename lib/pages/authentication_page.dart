@@ -1,5 +1,6 @@
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:Edudito/helpers/utils.dart';
 import 'package:flutter/material.dart';
 import '../widgets/no_glow_behavior.dart';
 
@@ -81,8 +82,10 @@ class _AuthPageState extends State<AuthPage> {
                 for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
                 SizedBox(height: 16),
                 _buildAuthButton(
-                    text: isSignIn ? Strings.signIn : Strings.signUp,
-                    fillColor: StyleGuide.secondaryColor),
+                  text: isSignIn ? Strings.signIn : Strings.signUp,
+                  fillColor: StyleGuide.secondaryColor,
+                  onTap: authenticateUserWithEmail,
+                ),
                 SizedBox(height: 10),
                 _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
                 Expanded(
@@ -95,6 +98,23 @@ class _AuthPageState extends State<AuthPage> {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  void authenticateUserWithEmail() {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text('Signing you in'),
+        content: FutureBuilder(
+          future: Utils.provider(context).authenticate(authData, state: state),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting ||
+                !snapshot.hasData) return Text('Please be patient');
+            return Text(snapshot.data);
+          },
         ),
       ),
     );

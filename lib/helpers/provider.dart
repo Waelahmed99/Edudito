@@ -24,6 +24,11 @@ class ProviderModel extends ChangeNotifier {
         return 'Password doesn\'t match';
     }
 
+    if (!data.containsKey('email') || data['email'].isEmpty)
+      return 'Please enter your email';
+    if (!data.containsKey('password') || data['password'].isEmpty)
+      return 'Please enter your password';
+
     UserCredential user;
     try {
       if (state == Auth.SignIn)
@@ -33,9 +38,12 @@ class ProviderModel extends ChangeNotifier {
         user = await firebaseAuth.createUserWithEmailAndPassword(
             email: data['email'], password: data['password']);
     } catch (e) {
+      /// [todo] parse error message.
+      print(e.message);
       return e.message;
     }
 
+    /// [todo] save user credential.
     return 'success';
   }
 }
