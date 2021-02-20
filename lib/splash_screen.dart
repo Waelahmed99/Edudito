@@ -1,3 +1,5 @@
+import 'package:Edudito/helpers/utils.dart';
+import 'package:Edudito/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'pages/welcome_page.dart';
 
@@ -10,7 +12,8 @@ class SplashScreen extends StatelessWidget {
         Duration(seconds: 2),
         () => Navigator.of(context).pushAndRemoveUntil(
             MaterialPageRoute(
-              builder: (context) => WelcomePage(),
+              builder: (context) =>
+                  Utils.provider(context).isAuth() ? HomePage() : WelcomePage(),
             ),
             (Route<dynamic> route) => false),
       );

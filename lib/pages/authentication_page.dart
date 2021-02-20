@@ -2,6 +2,7 @@ import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/helpers/utils.dart';
 import 'package:flutter/material.dart';
+import '../main.dart';
 import '../widgets/no_glow_behavior.dart';
 
 enum Auth { SignIn, SignUp }
@@ -113,6 +114,13 @@ class _AuthPageState extends State<AuthPage> {
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting ||
                 !snapshot.hasData) return Text('Please be patient');
+            if (snapshot.data == 'success')
+              WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => Navigator.of(context).pushAndRemoveUntil(
+                      MaterialPageRoute(
+                        builder: (context) => MyApp(),
+                      ),
+                      (_) => false));
             return Text(snapshot.data);
           },
         ),

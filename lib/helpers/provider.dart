@@ -12,6 +12,8 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  bool isAuth() => firebaseAuth.currentUser != null;
+
   ProviderModel() {
     firebaseAuth = FirebaseAuth.instance;
     _isLoading = false;
