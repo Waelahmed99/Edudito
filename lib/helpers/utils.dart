@@ -2,5 +2,6 @@ import 'provider.dart';
 import 'package:provider/provider.dart';
 
 class Utils {
-  static ProviderModel provider(context) => Provider.of<ProviderModel>(context);
+  static ProviderModel provider(context, {bool listen = true}) =>
+      Provider.of<ProviderModel>(context, listen: listen);
 }

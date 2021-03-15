@@ -10,12 +10,14 @@ class SplashScreen extends StatelessWidget {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Future.delayed(
         Duration(seconds: 2),
-        () => Navigator.of(context).pushAndRemoveUntil(
-            MaterialPageRoute(
-              builder: (context) =>
-                  Utils.provider(context).isAuth() ? HomePage() : WelcomePage(),
-            ),
-            (Route<dynamic> route) => false),
+        () async {
+          bool isAuth = await Utils.provider(context).isAuth();
+          return Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(
+                builder: (context) => isAuth ? HomePage() : WelcomePage(),
+              ),
+              (Route<dynamic> route) => false);
+        },
       );
     });
     return Scaffold(

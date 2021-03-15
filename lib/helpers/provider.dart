@@ -1,10 +1,12 @@
 import 'package:Edudito/pages/authentication_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class ProviderModel extends ChangeNotifier {
   bool _isLoading;
   FirebaseAuth firebaseAuth;
+  GoogleSignIn _googleSignIn;
 
   get isLoading => _isLoading;
   set isLoading(bool value) {
@@ -12,11 +14,25 @@ class ProviderModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isAuth() => firebaseAuth.currentUser != null;
+  Future<bool> isAuth() async =>
+      firebaseAuth.currentUser != null || await (_googleSignIn.isSignedIn());
 
   ProviderModel() {
+    _googleSignIn = GoogleSignIn(
+      scopes: <String>['email'],
+    );
     firebaseAuth = FirebaseAuth.instance;
     _isLoading = false;
+  }
+
+  Future<String> googleSignIn() async {
+    try {
+      await _googleSignIn.signIn();
+    } catch (error) {
+      print(error);
+      return error.toString();
+    }
+    return 'success';
   }
 
   Future<String> authenticate(Map<String, String> data,
@@ -30,6 +46,9 @@ class ProviderModel extends ChangeNotifier {
       return 'Please enter your email';
     if (!data.containsKey('password') || data['password'].isEmpty)
       return 'Please enter your password';
+    if (!RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(data['email'])) return 'Please enter a valid emal address';
 
     UserCredential user;
     try {

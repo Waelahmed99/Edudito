@@ -85,10 +85,14 @@ class _AuthPageState extends State<AuthPage> {
                 _buildAuthButton(
                   text: isSignIn ? Strings.signIn : Strings.signUp,
                   fillColor: StyleGuide.secondaryColor,
-                  onTap: authenticateUserWithEmail,
+                  onTap: () => authenticateUser(),
                 ),
                 SizedBox(height: 10),
-                _buildAuthButton(text: 'Google', fillColor: Color(0xffE64343)),
+                _buildAuthButton(
+                  text: 'Google',
+                  fillColor: Color(0xffE64343),
+                  onTap: () => authenticateUser(gmail: true),
+                ),
                 Expanded(
                   child: Container(
                     padding: EdgeInsets.only(bottom: 25),
@@ -104,13 +108,16 @@ class _AuthPageState extends State<AuthPage> {
     );
   }
 
-  void authenticateUserWithEmail() {
+  void authenticateUser({bool gmail = false}) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Signing you in'),
         content: FutureBuilder(
-          future: Utils.provider(context).authenticate(authData, state: state),
+          future: gmail
+              ? Utils.provider(context, listen: false).googleSignIn()
+              : Utils.provider(context, listen: false)
+                  .authenticate(authData, state: state),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting ||
                 !snapshot.hasData) return Text('Please be patient');
