@@ -205,6 +205,7 @@ class _AuthPageState extends State<AuthPage> {
             ],
           ),
           child: TextFormField(
+            obscureText: mapKeys[idx].contains('password'),
             decoration: new InputDecoration(
               focusedBorder: OutlineInputBorder(
                 borderSide: BorderSide(color: Colors.transparent, width: 18.0),
