@@ -1,8 +1,8 @@
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/helpers/utils.dart';
-import 'package:Edudito/pages/pages.dart';
+import 'package:Edudito/screens/pages.dart';
 import 'package:flutter/material.dart';
-import 'pages/welcome_page.dart';
+import 'screens/welcome_page.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
