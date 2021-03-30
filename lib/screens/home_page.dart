@@ -2,6 +2,7 @@ import 'package:Edudito/Provider/enrolment_prov.dart';
 import 'package:Edudito/Provider/home_prov.dart';
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:Edudito/screens/categories_page.dart';
 import 'package:Edudito/screens/environment_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -225,8 +226,9 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
-              children:
-                  Strings.categories.map((e) => categoryImage(e)).toList(),
+              children: Strings.categories
+                  .map((e) => categoryImage(e, context))
+                  .toList(),
             ),
           ),
         ],
@@ -234,17 +236,24 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget categoryImage(String name) {
+  Widget categoryImage(String name, context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(18.0),
-          child: Image.asset(
-            'assets/$name.png',
-            height: 60,
-            width: 100,
-            fit: BoxFit.cover,
+        GestureDetector(
+          onTap: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => CategoriesPage(name))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18.0),
+            child: Hero(
+              tag: '$name',
+              child: Image.asset(
+                'assets/$name.png',
+                height: 60,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
           ),
         ),
         SizedBox(height: 2),
