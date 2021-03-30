@@ -1,45 +1,51 @@
+import 'package:Edudito/Provider/home_prov.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/pages/environment_details.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        alignment: Alignment.center,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(height: 10),
-              SafeArea(
-                child: Text(
-                  'Home',
-                  style: TextStyle(
-                    fontSize: 21,
-                    color: StyleGuide.mainColor,
+    return ChangeNotifierProvider(
+      create: (_) => HomeProvider(),
+      child: Scaffold(
+        body: Container(
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.center,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 10),
+                SafeArea(
+                  child: Text(
+                    'Home',
+                    style: TextStyle(
+                      fontSize: 21,
+                      color: StyleGuide.mainColor,
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 16),
-              searchWidget(),
-              SizedBox(height: 16),
-              Container(
-                padding: EdgeInsets.only(left: 20),
-                child: Column(
-                  children: [
-                    popularForYou(context, title: 'Popular for you'),
-                    SizedBox(height: 25),
-                    categoriesWidget(context),
-                    SizedBox(height: 25),
-                    popularForYou(context, title: 'Highly recommend'),
-                    SizedBox(height: 25),
-                  ],
+                SizedBox(height: 16),
+                searchWidget(),
+                SizedBox(height: 16),
+                Container(
+                  padding: EdgeInsets.only(left: 20),
+                  child: Column(
+                    children: [
+                      popularForYou(context, title: 'Popular for you'),
+                      SizedBox(height: 25),
+                      categoriesWidget(context),
+                      SizedBox(height: 25),
+                      popularForYou(context, title: 'Highly recommend'),
+                      SizedBox(height: 25),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -100,11 +106,22 @@ class HomePage extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           child: Row(
             children: [
-              for (int i = 0; i < 3; i++)
-                Container(
-                  padding: EdgeInsets.only(right: 10),
-                  child: materialItem(context, i + 1, time: '25 min'),
+              Consumer<HomeProvider>(
+                builder: (_, prov, widg) => StreamBuilder(
+                  stream: prov.getPopularCourses(),
+                  builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    for (int i = 0; i < snapshot.data.size && i <= 5; i++)
+                      return Container(
+                        padding: EdgeInsets.only(right: 10),
+                        child: materialItem(
+                          context,
+                          snapshot.data.docs[i],
+                        ),
+                      );
+                    return Center(child: Text('No courses yet'));
+                  },
                 ),
+              ),
             ],
           ),
         ),
@@ -112,16 +129,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget materialItem(
-    BuildContext context,
-    int i, {
-    String image,
-    String time,
-    int rating = 2,
-    String name = 'The principles of design',
-    String authorName = 'Hana',
-    String authorImage = 'image',
-  }) {
+  Widget materialItem(BuildContext context, QueryDocumentSnapshot snapshot) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(MaterialPageRoute(
         builder: (context) => EnvironmentDetails(id: '1'),
@@ -130,8 +138,8 @@ class HomePage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
-            child: Image.asset(
-              'assets/cover$i.jpg',
+            child: Image.network(
+              snapshot.get('image'),
               fit: BoxFit.fill,
               width: 250,
             ),
@@ -141,7 +149,7 @@ class HomePage extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                time,
+                snapshot.get('duration') + ' minutes',
                 style: TextStyle(fontSize: 11),
               ),
               SizedBox(width: 10),
@@ -153,12 +161,14 @@ class HomePage extends StatelessWidget {
                 Icon(
                   Icons.star,
                   size: 17,
-                  color: rating > i ? Color(0xffFBDF5B) : Colors.grey[300],
+                  color: snapshot.get('rating') > i
+                      ? Color(0xffFBDF5B)
+                      : Colors.grey[300],
                 ),
             ],
           ),
           Text(
-            name,
+            snapshot.get('title'),
             style: TextStyle(
               fontSize: 11,
               color: StyleGuide.mainColor,
@@ -166,7 +176,7 @@ class HomePage extends StatelessWidget {
             ),
           ),
           Text(
-            authorName,
+            snapshot.get('author'),
             style: TextStyle(fontSize: 11),
           ),
         ],

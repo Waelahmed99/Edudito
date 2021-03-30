@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 
 class HomeProvider extends ChangeNotifier {
-  Stream<QuerySnapshot> getPosts() {
+  Stream<QuerySnapshot> getPopularCourses() {
     return FirebaseFirestore.instance
         .collection('courses')
         .orderBy('rating', descending: true)
