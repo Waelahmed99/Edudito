@@ -60,12 +60,8 @@ class AccountPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      'assets/location.png',
-                      width: 14,
-                    ),
                     SizedBox(width: 3),
-                    Text('London'),
+                    Text('Newbie'),
                   ],
                 ),
                 SizedBox(height: 15),
