@@ -4,6 +4,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
+  final List<String> categories = [
+    'mathematics',
+    'design',
+    'programming',
+    'physics',
+    'chemistry',
+    'biology',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -197,14 +206,7 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
-              children: [
-                categoryImage('mathematics'),
-                categoryImage('design'),
-                categoryImage('programming'),
-                categoryImage('physics'),
-                categoryImage('chemistry'),
-                categoryImage('biology'),
-              ],
+              children: categories.map((e) => categoryImage(e)).toList(),
             ),
           ),
         ],
