@@ -4,6 +4,7 @@ import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/screens/categories_page.dart';
 import 'package:Edudito/screens/environment_details.dart';
+import 'package:Edudito/screens/search_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,20 @@ class HomePage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (_) => HomeProvider(),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          bottomOpacity: 0.0,
+          elevation: 0.0,
+          centerTitle: true,
+          title: Text(
+            'Home',
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              color: StyleGuide.mainColor,
+              fontWeight: FontWeight.w700,
+            ),
+          ),
+        ),
         body: Container(
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.center,
@@ -22,17 +37,7 @@ class HomePage extends StatelessWidget {
             child: Column(
               children: [
                 SizedBox(height: 10),
-                SafeArea(
-                  child: Text(
-                    'Home',
-                    style: TextStyle(
-                      fontSize: 21,
-                      color: StyleGuide.mainColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 16),
-                searchWidget(),
+                searchWidget(context),
                 SizedBox(height: 16),
                 Container(
                   padding: EdgeInsets.only(left: 20),
@@ -55,37 +60,38 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget searchWidget() {
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 8),
-      margin: EdgeInsets.symmetric(horizontal: 30),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.grey[200],
-      ),
-      child: Row(
-        children: [
-          Icon(
-            Icons.search,
-            size: 18,
-            color: Colors.grey[600],
-          ),
-          SizedBox(width: 8),
-          Expanded(
-            child: TextField(
-              cursorColor: StyleGuide.mainColor,
-              maxLines: 1,
-              decoration: InputDecoration(
-                hintText: 'Search',
-                border: InputBorder.none,
-                focusedBorder: InputBorder.none,
-                enabledBorder: InputBorder.none,
-                errorBorder: InputBorder.none,
-                disabledBorder: InputBorder.none,
+  Widget searchWidget(context) {
+    return GestureDetector(
+      onTap: () => Navigator.of(context).push(SearchRoutePage(
+        builder: (context) => SearchPage(),
+      )),
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        margin: EdgeInsets.symmetric(horizontal: 30),
+        height: 50,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Colors.grey[200],
+        ),
+        child: Row(
+          children: [
+            Icon(
+              Icons.search,
+              size: 18,
+              color: Colors.grey[600],
+            ),
+            SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                'Search',
+                style: TextStyle(
+                  color: Colors.black54,
+                  fontSize: 15,
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
