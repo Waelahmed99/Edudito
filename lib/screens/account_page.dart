@@ -1,10 +1,9 @@
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:Edudito/screens/enrolled_environment.dart';
 import 'package:Edudito/screens/plan_tracker.dart';
 import 'package:Edudito/screens/progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
-
-import 'material_page.dart';
 import 'my_enivronment_page.dart';
 
 class AccountPage extends StatelessWidget {
@@ -73,8 +72,8 @@ class AccountPage extends StatelessWidget {
                     navigator: ProgressPage()),
                 _menuItem(context,
                     icon: 'material',
-                    text: 'Material',
-                    navigator: MyMaterialPage()),
+                    text: 'Enrolled environments',
+                    navigator: EnrolledEnvironments()),
                 _menuItem(context,
                     icon: 'my_environment',
                     text: 'My environment',
