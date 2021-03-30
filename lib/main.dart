@@ -29,6 +29,7 @@ class _MyAppState extends State<MyApp> {
     return ChangeNotifierProvider.value(
       value: provider,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'Poppins'),
         routes: {
           '/': (context) => SplashScreen(),

@@ -33,7 +33,9 @@ dependencies:
   provider: ^4.3.3
   google_sign_in: ^4.5.4
   cloud_firestore: ^0.16.0
-
+  flutter_svg: ^0.19.3
+  flutter_rating_bar: ^4.0.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

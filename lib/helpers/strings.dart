@@ -5,7 +5,7 @@ class Strings {
 
   // Welcome|auth strings
   static final String welcomeMessage =
-      'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.';
+      'Edudito is your learning environmnet. With Edudito, you can learn, teach and discover different fields of science using an interactive environment using your smart phone only.';
   static final String signIn = 'Sign In';
   static final String signUp = 'Sign Up';
   static final String signInMessage = 'Welcome back';

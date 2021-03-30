@@ -32,6 +32,8 @@ class ProviderModel extends ChangeNotifier {
       print(error);
       return error.toString();
     }
+
+    /// [todo] save user credentials.
     return 'success';
   }
 
@@ -48,7 +50,7 @@ class ProviderModel extends ChangeNotifier {
       return 'Please enter your password';
     if (!RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-        .hasMatch(data['email'])) return 'Please enter a valid emal address';
+        .hasMatch(data['email'])) return 'Please enter a valid email address';
 
     UserCredential user;
     try {
@@ -64,7 +66,7 @@ class ProviderModel extends ChangeNotifier {
       return e.message;
     }
 
-    /// [todo] save user credential.
+    /// [todo] save user credentials.
     return 'success';
   }
 }

@@ -16,10 +16,14 @@ class WelcomePage extends StatelessWidget {
               Strings.appName,
               style: TextStyle(
                 fontSize: 30,
+                fontWeight: FontWeight.w700,
                 color: Color(0xff07225E),
               ),
             ),
-            Image.asset('assets/welcome_icon.png'),
+            Image.asset(
+              'assets/welcome_icon.png',
+              width: 500,
+            ),
             _buildWelcomeWidget(context),
           ],
         ),
