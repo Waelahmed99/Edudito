@@ -39,8 +39,8 @@ class EnvironmentDetails extends StatelessWidget {
                   children: [
                     ClipRRect(
                       borderRadius: BorderRadius.circular(30.0),
-                      child: Image.asset(
-                        'assets/cover1.jpg',
+                      child: Image.network(
+                        snapshot.get('image'),
                         fit: BoxFit.fill,
                         width: MediaQuery.of(context).size.width,
                       ),
@@ -52,7 +52,7 @@ class EnvironmentDetails extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            snapshot.get('time'),
+                            snapshot.get('duration'),
                             style: TextStyle(fontSize: 11),
                           ),
                           SizedBox(width: 10),
@@ -99,7 +99,7 @@ class EnvironmentDetails extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      snapshot.get('desc'),
+                      snapshot.get('des'),
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey,
