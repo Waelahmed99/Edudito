@@ -32,6 +32,9 @@ class SearchPage extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             searchWidget(),
+            Expanded(
+              child: ListView(),
+            )
           ],
         ),
       ),
@@ -59,6 +62,7 @@ class SearchPage extends StatelessWidget {
               autofocus: true,
               cursorColor: StyleGuide.mainColor,
               maxLines: 1,
+              onChanged: (d) {},
               decoration: InputDecoration(
                 hintText: 'Search',
                 border: InputBorder.none,

@@ -1,9 +1,12 @@
+import 'package:Edudito/helpers/provider.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/screens/enrolled_environment.dart';
 import 'package:Edudito/screens/plan_tracker.dart';
 import 'package:Edudito/screens/progress_page.dart';
+import 'package:Edudito/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import 'my_enivronment_page.dart';
 
 class AccountPage extends StatelessWidget {
@@ -99,13 +102,16 @@ class AccountPage extends StatelessWidget {
     bool logout = false,
     dynamic navigator,
   }) {
+    final authprovider = Provider.of<ProviderModel>(context);
+
     return GestureDetector(
       onTap: () {
-        if (logout)
-          return;
-
-        /// [todo] Implement logout.
-        else
+        if (logout) {
+          authprovider.firebaseAuth.signOut();
+          Navigator.of(context).pushAndRemoveUntil(
+              MaterialPageRoute(builder: (context) => SplashScreen()),
+              (Route<dynamic> route) => false);
+        } else
           Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => navigator,
           ));
