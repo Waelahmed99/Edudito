@@ -36,6 +36,7 @@ dependencies:
   flutter_svg: ^0.19.3
   flutter_rating_bar: ^4.0.0
   line_awesome_flutter: ^1.0.1
+  fl_chart: ^0.30.0
   
 dev_dependencies:
   flutter_test:
