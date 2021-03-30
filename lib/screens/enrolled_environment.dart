@@ -50,17 +50,20 @@ class EnrolledEnvironments extends StatelessWidget {
                           AlwaysStoppedAnimation<Color>(StyleGuide.mainColor),
                     ),
                   );
-                var data = snapshot.data.docs;
-
-                return ListView.separated(
-                  padding: EdgeInsets.all(12),
-                  itemCount: data.length,
-                  separatorBuilder: (context, index) => Container(
-                      margin: EdgeInsets.symmetric(vertical: 12),
-                      padding: EdgeInsets.symmetric(horizontal: 12),
-                      child: Divider(color: Colors.grey)),
-                  itemBuilder: (context, index) =>
-                      MaterialItem(snapshot: data[index]),
+                var data = snapshot.data.docs.reversed.toList();
+                if (data.isNotEmpty)
+                  return ListView.separated(
+                    padding: EdgeInsets.all(12),
+                    itemCount: data.length,
+                    separatorBuilder: (context, index) => Container(
+                        margin: EdgeInsets.symmetric(vertical: 12),
+                        padding: EdgeInsets.symmetric(horizontal: 12),
+                        child: Divider(color: Colors.grey)),
+                    itemBuilder: (context, index) =>
+                        MaterialItem(snapshot: data[index]),
+                  );
+                return Center(
+                  child: Text('No enrolled environmnets'),
                 );
               },
             ),
