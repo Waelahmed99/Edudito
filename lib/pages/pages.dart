@@ -27,7 +27,6 @@ class _PagesState extends State<Pages> {
           _body = HomePage();
           break;
         case 1:
-
           /// [todo] add add effect.
           print('Add button pressed');
           break;
