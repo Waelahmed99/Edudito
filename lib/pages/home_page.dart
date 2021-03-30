@@ -13,6 +13,7 @@ class HomePage extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              SizedBox(height: 10),
               SafeArea(
                 child: Text(
                   'Home',
