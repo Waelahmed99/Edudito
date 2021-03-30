@@ -61,12 +61,13 @@ class ProviderModel extends ChangeNotifier {
       else {
         user = await firebaseAuth.createUserWithEmailAndPassword(
             email: data['email'], password: data['password']);
+        user.user.updateProfile(displayName: data['username']);
 
         await FirebaseFirestore.instance
             .collection("users")
             .doc(user.user.uid)
             .set(
-          {'email': data['email'], 'name': user.user.displayName},
+          {'email': data['email'], 'name': data['username']},
         );
       }
     } catch (e) {

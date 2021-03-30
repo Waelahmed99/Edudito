@@ -2,6 +2,7 @@ import 'package:Edudito/Provider/enrolment_prov.dart';
 import 'package:Edudito/Provider/home_prov.dart';
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:Edudito/helpers/utils.dart';
 import 'package:Edudito/screens/environment_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -114,6 +115,10 @@ class HomePage extends StatelessWidget {
                       ? prov.getRecommendations()
                       : prov.getPopularCourses(),
                   builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting)
+                      return CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                      );
                     for (int i = 0; i < snapshot.data.size && i <= 5; i++)
                       return Container(
                         padding: EdgeInsets.only(right: 10),
@@ -149,10 +154,13 @@ class HomePage extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15.0),
-            child: Image.network(
-              snapshot.get('image'),
+            child: FadeInImage(
+              placeholder: AssetImage('assets/placeholder.jpg'),
               fit: BoxFit.fill,
               width: 250,
+              image: NetworkImage(
+                snapshot.get('image'),
+              ),
             ),
           ),
           SizedBox(height: 4),

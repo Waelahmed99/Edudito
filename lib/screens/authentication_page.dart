@@ -24,8 +24,8 @@ class _AuthPageState extends State<AuthPage> {
 
   @override
   void initState() {
-    labels = ['Email', 'Password', 'Confirm password'];
-    mapKeys = ['email', 'password', 'repassword'];
+    labels = ['Username', 'Email', 'Password', 'Confirm password'];
+    mapKeys = ['username', 'email', 'password', 'repassword'];
     authData = {};
     state = widget.initialAuth;
     super.initState();
@@ -80,7 +80,7 @@ class _AuthPageState extends State<AuthPage> {
               mainAxisSize: MainAxisSize.max,
               children: [
                 SizedBox(height: 60),
-                for (int i = 0; i < (isSignIn ? 2 : 3); i++) _buildTextField(i),
+                for (int i = 0; i < (isSignIn ? 2 : 4); i++) _buildTextField(i),
                 SizedBox(height: 16),
                 _buildAuthButton(
                   text: isSignIn ? Strings.signIn : Strings.signUp,
