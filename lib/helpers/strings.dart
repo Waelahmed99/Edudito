@@ -15,4 +15,5 @@ class Strings {
   static final String name = 'Your name';
   static final String switchToSignUp = 'Don\'t have an account?';
   static final String switchtoSignIn = 'Already have an account?';
+  static final categories = ['mathematics','design','programming','physics','chemistry','biology'];
 }

@@ -1,4 +1,5 @@
 import 'package:Edudito/Provider/home_prov.dart';
+import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:Edudito/pages/environment_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -209,14 +210,7 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
-              children: [
-                categoryImage('mathematics'),
-                categoryImage('design'),
-                categoryImage('programming'),
-                categoryImage('physics'),
-                categoryImage('chemistry'),
-                categoryImage('biology'),
-              ],
+              children: Strings.categories.map((e) => categoryImage(e)).toList(),
             ),
           ),
         ],
