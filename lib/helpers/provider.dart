@@ -60,6 +60,8 @@ class ProviderModel extends ChangeNotifier {
       else
         user = await firebaseAuth.createUserWithEmailAndPassword(
             email: data['email'], password: data['password']);
+
+      user.user.updateProfile(displayName: data['username']);
     } catch (e) {
       /// [todo] parse error message.
       print(e.message);
