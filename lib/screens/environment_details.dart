@@ -36,7 +36,7 @@ class EnvironmentDetails extends StatelessWidget {
             color: StyleGuide.mainColor,
             fontWeight: FontWeight.w700,
           ),
-        ),  
+        ),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
