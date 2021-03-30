@@ -31,4 +31,13 @@ class EnrollmentProvider extends ChangeNotifier {
         .get();
     return docSnap.exists;
   }
+
+  Stream<QuerySnapshot> getEnrolled(String uid) {
+    var docSnap = FirebaseFirestore.instance
+        .collection("users")
+        .doc(uid)
+        .collection('enrollments')
+        .snapshots();
+    return docSnap;
+  }
 }

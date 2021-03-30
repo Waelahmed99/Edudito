@@ -111,40 +111,114 @@ class HomePage extends StatelessWidget {
           ),
         ),
         SizedBox(height: 8),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              Consumer<HomeProvider>(
-                builder: (_, prov, widg) => StreamBuilder(
-                  stream: title == 'Highly recommend'
-                      ? prov.getRecommendations()
-                      : prov.getPopularCourses(),
-                  builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting)
-                      return CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                      );
-                    for (int i = 0; i < snapshot.data.size && i <= 5; i++)
-                      return Container(
-                        padding: EdgeInsets.only(right: 10),
-                        child: materialItem(
-                          context,
-                          snapshot.data.docs[i],
-                        ),
-                      );
-                    return Center(child: Text('No courses yet'));
-                  },
-                ),
-              ),
-            ],
+        Consumer<HomeProvider>(
+          builder: (_, prov, widg) => StreamBuilder(
+            stream: title == 'Highly recommend'
+                ? prov.getRecommendations()
+                : prov.getPopularCourses(),
+            builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting)
+                return CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                );
+
+              if (snapshot.data.docs.isNotEmpty)
+                return SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: snapshot.data.docs
+                        .map(
+                          (e) => Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 8.0),
+                            child: MaterialItem(
+                              snapshot: e,
+                            ),
+                          ),
+                        )
+                        .toList(),
+                  ),
+                );
+              else
+                return Center(child: Text('No courses yet'));
+            },
           ),
         ),
       ],
     );
   }
 
-  Widget materialItem(BuildContext context, QueryDocumentSnapshot snapshot) {
+  Widget categoriesWidget(context) {
+    return Container(
+      decoration: BoxDecoration(),
+      child: Column(
+        children: [
+          Container(
+            alignment: Alignment.topLeft,
+            child: Text(
+              'What are you looking for',
+              style: TextStyle(
+                color: StyleGuide.mainColor,
+                fontWeight: FontWeight.w700,
+                fontSize: 15,
+              ),
+            ),
+          ),
+          SizedBox(height: 10),
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 200,
+            child: GridView.count(
+              crossAxisCount: 3,
+              childAspectRatio: 100 / 72,
+              physics: NeverScrollableScrollPhysics(),
+              children: Strings.categories
+                  .map((e) => categoryImage(e, context))
+                  .toList(),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget categoryImage(String name, context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        GestureDetector(
+          onTap: () => Navigator.of(context)
+              .push(MaterialPageRoute(builder: (_) => CategoriesPage(name))),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(18.0),
+            child: Hero(
+              tag: '$name',
+              child: Image.asset(
+                'assets/$name.png',
+                height: 60,
+                width: 100,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 2),
+        Text(name[0].toUpperCase() + name.substring(1)),
+      ],
+    );
+  }
+}
+
+class MaterialItem extends StatelessWidget {
+  const MaterialItem({
+    Key key,
+    @required this.snapshot,
+  }) : super(key: key);
+
+  final QueryDocumentSnapshot snapshot;
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
@@ -206,66 +280,6 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-
-  Widget categoriesWidget(context) {
-    return Container(
-      decoration: BoxDecoration(),
-      child: Column(
-        children: [
-          Container(
-            alignment: Alignment.topLeft,
-            child: Text(
-              'What are you looking for',
-              style: TextStyle(
-                color: StyleGuide.mainColor,
-                fontWeight: FontWeight.w700,
-                fontSize: 15,
-              ),
-            ),
-          ),
-          SizedBox(height: 10),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: 200,
-            child: GridView.count(
-              crossAxisCount: 3,
-              childAspectRatio: 100 / 72,
-              physics: NeverScrollableScrollPhysics(),
-              children: Strings.categories
-                  .map((e) => categoryImage(e, context))
-                  .toList(),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget categoryImage(String name, context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        GestureDetector(
-          onTap: () => Navigator.of(context)
-              .push(MaterialPageRoute(builder: (_) => CategoriesPage(name))),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(18.0),
-            child: Hero(
-              tag: '$name',
-              child: Image.asset(
-                'assets/$name.png',
-                height: 60,
-                width: 100,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
-        SizedBox(height: 2),
-        Text(name[0].toUpperCase() + name.substring(1)),
-      ],
     );
   }
 }
