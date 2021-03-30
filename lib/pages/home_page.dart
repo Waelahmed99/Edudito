@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                   children: [
                     popularForYou(context, title: 'Popular for you'),
                     SizedBox(height: 25),
-                    categoriesWidget(),
+                    categoriesWidget(context),
                     SizedBox(height: 25),
                     popularForYou(context, title: 'Highly recommend'),
                     SizedBox(height: 25),
@@ -173,7 +173,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget categoriesWidget() {
+  Widget categoriesWidget(context) {
     return Container(
       decoration: BoxDecoration(),
       child: Column(
@@ -190,22 +190,25 @@ class HomePage extends StatelessWidget {
             ),
           ),
           SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text('Physics'),
-              Text('Chemistry'),
-              Text('Biology'),
-            ],
-          ),
-          SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text('Mathematics'),
-              Text('Design'),
-              Text('Programming'),
-            ],
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: 140,
+            child: GridView.count(
+              crossAxisCount: 3,
+              mainAxisSpacing: 0.02,
+              shrinkWrap: true,
+              crossAxisSpacing: 0.01,
+              childAspectRatio: 2,
+              physics: NeverScrollableScrollPhysics(),
+              children: [
+                categoryImage('mathematics'),
+                categoryImage('design'),
+                categoryImage('programming'),
+                categoryImage('physics'),
+                categoryImage('chemistry'),
+                categoryImage('biology'),
+              ],
+            ),
           ),
         ],
       ),
@@ -216,9 +219,14 @@ class HomePage extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Image.asset('$name.jpg'),
-        SizedBox(height: 5),
-        Text(name),
+        ClipRRect(
+          child: Image.asset(
+            'assets/$name.jpg',
+            height: 30,
+          ),
+        ),
+        SizedBox(height: 2),
+        Text(name[0].toUpperCase() + name.substring(1)),
       ],
     );
   }
