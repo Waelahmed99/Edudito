@@ -1,20 +1,15 @@
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class EnvironmentDetails extends StatelessWidget {
-  final String id;
+  final QueryDocumentSnapshot snapshot;
 
-  EnvironmentDetails({this.id});
+  EnvironmentDetails({this.snapshot});
 
   @override
   Widget build(BuildContext context) {
-    String time = '25 min',
-        name = 'The principles of design',
-        authorName = 'Hana',
-        about =
-            'Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.';
-    int rating = 2;
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
@@ -23,7 +18,7 @@ class EnvironmentDetails extends StatelessWidget {
         elevation: 0.0,
         centerTitle: true,
         title: Text(
-          name,
+          snapshot.get('title'),
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             color: StyleGuide.mainColor,
@@ -57,7 +52,7 @@ class EnvironmentDetails extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            time,
+                            snapshot.get('time'),
                             style: TextStyle(fontSize: 11),
                           ),
                           SizedBox(width: 10),
@@ -69,7 +64,7 @@ class EnvironmentDetails extends StatelessWidget {
                             Icon(
                               Icons.star,
                               size: 17,
-                              color: rating > i
+                              color: snapshot.get('rating') > i
                                   ? Color(0xffFBDF5B)
                                   : Colors.grey[300],
                             ),
@@ -79,7 +74,7 @@ class EnvironmentDetails extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        name,
+                        snapshot.get('title'),
                         style: TextStyle(
                           fontSize: 17,
                           color: StyleGuide.mainColor,
@@ -90,7 +85,7 @@ class EnvironmentDetails extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       child: Text(
-                        authorName,
+                        snapshot.get('author'),
                         style: TextStyle(fontSize: 12),
                       ),
                     ),
@@ -104,7 +99,7 @@ class EnvironmentDetails extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      about,
+                      snapshot.get('desc'),
                       style: TextStyle(
                         fontSize: 13,
                         color: Colors.grey,

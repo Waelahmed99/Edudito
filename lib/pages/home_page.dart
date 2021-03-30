@@ -134,9 +134,13 @@ class HomePage extends StatelessWidget {
 
   Widget materialItem(BuildContext context, QueryDocumentSnapshot snapshot) {
     return GestureDetector(
-      onTap: () => Navigator.of(context).push(MaterialPageRoute(
-        builder: (context) => EnvironmentDetails(id: '1'),
-      )),
+      onTap: () => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => EnvironmentDetails(
+            snapshot: snapshot,
+          ),
+        ),
+      ),
       child: Column(
         children: [
           ClipRRect(
@@ -210,7 +214,8 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
-              children: Strings.categories.map((e) => categoryImage(e)).toList(),
+              children:
+                  Strings.categories.map((e) => categoryImage(e)).toList(),
             ),
           ),
         ],
