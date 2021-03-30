@@ -189,16 +189,12 @@ class HomePage extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 8),
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 140,
+            height: 200,
             child: GridView.count(
               crossAxisCount: 3,
-              mainAxisSpacing: 0.02,
-              shrinkWrap: true,
-              crossAxisSpacing: 0.01,
-              childAspectRatio: 2,
+              childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
               children: [
                 categoryImage('mathematics'),
@@ -220,9 +216,12 @@ class HomePage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         ClipRRect(
+          borderRadius: BorderRadius.circular(18.0),
           child: Image.asset(
             'assets/$name.jpg',
-            height: 30,
+            height: 60,
+            width: 100,
+            fit: BoxFit.cover,
           ),
         ),
         SizedBox(height: 2),
