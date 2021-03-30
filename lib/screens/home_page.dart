@@ -1,7 +1,7 @@
 import 'package:Edudito/Provider/home_prov.dart';
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
-import 'package:Edudito/pages/environment_details.dart';
+import 'package:Edudito/screens/environment_details.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

@@ -1,4 +1,4 @@
-import 'package:Edudito/pages/authentication_page.dart';
+import 'package:Edudito/screens/authentication_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_sign_in/google_sign_in.dart';

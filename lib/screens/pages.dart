@@ -1,5 +1,5 @@
-import 'package:Edudito/pages/account_page.dart';
-import 'package:Edudito/pages/home_page.dart';
+import 'package:Edudito/screens/account_page.dart';
+import 'package:Edudito/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -27,6 +27,7 @@ class _PagesState extends State<Pages> {
           _body = HomePage();
           break;
         case 1:
+
           /// [todo] add add effect.
           print('Add button pressed');
           break;
