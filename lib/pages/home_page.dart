@@ -8,15 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
-  final List<String> categories = [
-    'mathematics',
-    'design',
-    'programming',
-    'physics',
-    'chemistry',
-    'biology',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(

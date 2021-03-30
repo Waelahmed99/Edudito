@@ -14,7 +14,6 @@ class HomeProvider extends ChangeNotifier {
     return FirebaseFirestore.instance
         .collection('courses')
         .orderBy('rating', descending: true)
-        
         .limit(5)
         .snapshots();
   }
