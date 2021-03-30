@@ -20,20 +20,31 @@ class CategoriesPage extends StatelessWidget {
                 tag: name,
               ),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                  (context, index) => Consumer<CategoriesProvider>(
-                        builder: (_, provider, d) => StreamBuilder<QuerySnapshot>(
-                          stream: provider.getCategories('${name.toLowerCase()}'),
-                          builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
-                            final data = snap.data;
-                            print(data.docs);
-                            return ListTile( 
-                            );
-                          },
-                        ),
+            Consumer<CategoriesProvider>(
+              builder: (_, provider, d) => StreamBuilder<QuerySnapshot>(
+                stream: provider.getCategories('${name.toLowerCase()}'),
+                builder: (context, AsyncSnapshot<QuerySnapshot> snap) {
+                  if (snap.connectionState == ConnectionState.waiting) {
+                    //todo handle state
+                    return SliverToBoxAdapter(child: CircularProgressIndicator()); //todo set progress bar
+                  }
+                  if (snap.hasData == null) {
+                    return SliverToBoxAdapter(child: Container());
+                  }
+                  return SliverList(
+                    delegate: SliverChildBuilderDelegate(
+                      (context, index) => ListTile(
+                        title: Text('${snap.data.docs[index].get('title')}'),
+                        subtitle:
+                            Text('${snap.data.docs[index].get('author')}'),
+                        leading:
+                            Image.network(snap.data.docs[index].get('image')),
                       ),
-                  childCount: 10),
+                      childCount: snap.data.size,
+                    ),
+                  );
+                },
+              ),
             )
           ],
         ),

@@ -5,7 +5,7 @@ class CategoriesProvider extends ChangeNotifier {
   Stream<QuerySnapshot> getCategories(String category)  {
     return FirebaseFirestore.instance
         .collection("courses")
-        .where(category, isEqualTo: "category")
+        .where('category', isEqualTo: category)
         .snapshots();
   }
 }
