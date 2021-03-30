@@ -1,7 +1,10 @@
+import 'package:Edudito/Provider/enrolment_prov.dart';
+import 'package:Edudito/helpers/provider.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class EnvironmentDetails extends StatelessWidget {
   final QueryDocumentSnapshot snapshot;
@@ -10,6 +13,8 @@ class EnvironmentDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ProviderModel>(context);
+    final enrolProv = Provider.of<EnrollmentProvider>(context);
     return Scaffold(
       appBar: AppBar(
         leading: Container(),
@@ -172,18 +177,32 @@ class EnvironmentDetails extends StatelessWidget {
               ),
             ),
           ),
-          Container(
-            margin: EdgeInsets.all(16),
-            alignment: Alignment.bottomCenter,
-            padding: EdgeInsets.symmetric(vertical: 10),
-            decoration: BoxDecoration(
-              color: Color(0xffFBDF5B),
-              borderRadius: BorderRadius.circular(25),
-            ),
-            child: Text(
-              'Enroll now',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-            ),
+          FutureBuilder(
+            future: enrolProv.checkIfEnrolled(
+                provider.firebaseAuth.currentUser.uid, snapshot),
+            builder: (_, snap) => !snap.hasData
+                ? Container()
+                : GestureDetector(
+                    onTap: () => !snap.data
+                        ? enrolProv.enroll(
+                            provider.firebaseAuth.currentUser.uid, snapshot)
+                        : enrolProv.disenroll(
+                            provider.firebaseAuth.currentUser.uid, snapshot),
+                    child: Container(
+                      margin: EdgeInsets.all(16),
+                      alignment: Alignment.bottomCenter,
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      decoration: BoxDecoration(
+                        color: snap.data ? Colors.grey : Color(0xffFBDF5B),
+                        borderRadius: BorderRadius.circular(25),
+                      ),
+                      child: Text(
+                        snap.data ? 'Enrolled' : 'Enroll now',
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.w700),
+                      ),
+                    ),
+                  ),
           ),
         ],
       ),

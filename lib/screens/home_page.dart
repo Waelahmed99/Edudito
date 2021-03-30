@@ -1,3 +1,4 @@
+import 'package:Edudito/Provider/enrolment_prov.dart';
 import 'package:Edudito/Provider/home_prov.dart';
 import 'package:Edudito/helpers/strings.dart';
 import 'package:Edudito/helpers/style_guide.dart';
@@ -136,8 +137,11 @@ class HomePage extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).push(
         MaterialPageRoute(
-          builder: (context) => EnvironmentDetails(
-            snapshot: snapshot,
+          builder: (context) => ChangeNotifierProvider(
+            create: (_) => EnrollmentProvider(),
+            child: EnvironmentDetails(
+              snapshot: snapshot,
+            ),
           ),
         ),
       ),
