@@ -219,11 +219,8 @@ class HomePage extends StatelessWidget {
               crossAxisCount: 3,
               childAspectRatio: 100 / 72,
               physics: NeverScrollableScrollPhysics(),
-<<<<<<< HEAD
-              children: categories.map((e) => categoryImage(e)).toList(),
-=======
-              children: Strings.categories.map((e) => categoryImage(e)).toList(),
->>>>>>> 3a30770179ad2ad2e57bd2d8628dc642af83bf7d
+              children:
+                  Strings.categories.map((e) => categoryImage(e)).toList(),
             ),
           ),
         ],
