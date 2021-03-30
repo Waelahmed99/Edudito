@@ -40,7 +40,7 @@ class AccountPage extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage('assets/physics.jpg'),
+                      image: AssetImage('assets/physics.png'),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -112,8 +112,8 @@ class AccountPage extends StatelessWidget {
           ));
       },
       child: Container(
-        height: 50,
-        margin: EdgeInsets.symmetric(horizontal: 15).copyWith(bottom: 10),
+        height: 55,
+        margin: EdgeInsets.symmetric(horizontal: 18).copyWith(bottom: 11),
         padding: EdgeInsets.symmetric(horizontal: 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
