@@ -24,59 +24,66 @@ class ProgressPage extends StatelessWidget {
       ),
       body: Container(
         width: MediaQuery.of(context).size.width,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: 12),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  'My learning',
-                  style: TextStyle(
-                    color: StyleGuide.mainColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                  ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 12),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(left: 16),
+              child: Text(
+                'My learning',
+                style: TextStyle(
+                  color: StyleGuide.mainColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
                 ),
               ),
-              SizedBox(height: 12),
-              Container(
-                width: 300,
-                height: 170,
-                child: LineChartSample2(),
-              ),
-              SizedBox(height: 32),
-              Container(
-                alignment: Alignment.topLeft,
-                padding: EdgeInsets.only(left: 16),
-                child: Text(
-                  'My courses',
-                  style: TextStyle(
-                    color: StyleGuide.mainColor,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 18,
-                  ),
+            ),
+            SizedBox(height: 12),
+            Container(
+              width: 300,
+              height: 170,
+              child: LineChartSample2(),
+            ),
+            SizedBox(height: 32),
+            Container(
+              alignment: Alignment.topLeft,
+              padding: EdgeInsets.only(left: 16),
+              child: Text(
+                'My courses',
+                style: TextStyle(
+                  color: StyleGuide.mainColor,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 18,
                 ),
               ),
-              SizedBox(height: 12),
-              ProgressItem(
-                themeIdx: 0,
-                progress: 20,
+            ),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    SizedBox(height: 12),
+                    ProgressItem(
+                      themeIdx: 0,
+                      progress: 20,
+                    ),
+                    SizedBox(height: 12),
+                    ProgressItem(
+                      themeIdx: 1,
+                      progress: 100,
+                    ),
+                    SizedBox(height: 12),
+                    ProgressItem(
+                      themeIdx: 2,
+                      progress: 65,
+                    ),
+                    SizedBox(height: 12),
+                  ],
+                ),
               ),
-              SizedBox(height: 12),
-              ProgressItem(
-                themeIdx: 1,
-                progress: 100,
-              ),
-              SizedBox(height: 12),
-              ProgressItem(
-                themeIdx: 2,
-                progress: 65,
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -107,7 +114,7 @@ class ProgressItem extends StatelessWidget {
       // height: 100,
       child: Row(
         children: [
-          Icon(LineAwesomeIcons.trophy),
+          Icon(LineAwesomeIcons.trophy, color: Colors.white),
           SizedBox(width: 12),
           Container(
             width: 200,
