@@ -186,6 +186,7 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   Widget _buildTextField(int idx) {
+    if (isSignIn) idx++;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
