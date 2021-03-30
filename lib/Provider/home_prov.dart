@@ -9,4 +9,13 @@ class HomeProvider extends ChangeNotifier {
         .limit(5)
         .snapshots();
   }
+
+  Stream<QuerySnapshot> getRecommendations() {
+    return FirebaseFirestore.instance
+        .collection('courses')
+        .orderBy('rating', descending: true)
+        
+        .limit(5)
+        .snapshots();
+  }
 }

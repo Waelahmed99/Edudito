@@ -108,7 +108,9 @@ class HomePage extends StatelessWidget {
             children: [
               Consumer<HomeProvider>(
                 builder: (_, prov, widg) => StreamBuilder(
-                  stream: prov.getPopularCourses(),
+                  stream: title == 'Highly recommend'
+                      ? prov.getRecommendations()
+                      : prov.getPopularCourses(),
                   builder: (_, AsyncSnapshot<QuerySnapshot> snapshot) {
                     for (int i = 0; i < snapshot.data.size && i <= 5; i++)
                       return Container(
