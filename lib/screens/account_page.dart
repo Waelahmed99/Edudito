@@ -1,6 +1,11 @@
 import 'package:Edudito/helpers/style_guide.dart';
+import 'package:Edudito/screens/plan_tracker.dart';
+import 'package:Edudito/screens/progress_page.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+
+import 'material_page.dart';
+import 'my_enivronment_page.dart';
 
 class AccountPage extends StatelessWidget {
   @override
@@ -62,11 +67,24 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
                 SizedBox(height: 15),
-                _menuItem(icon: LineAwesomeIcons.trophy, text: 'Progress'),
-                _menuItem(icon: LineAwesomeIcons.trophy, text: 'Material'),
-                _menuItem(
-                    icon: LineAwesomeIcons.trophy, text: 'My environment'),
-                _menuItem(icon: LineAwesomeIcons.trophy, text: 'Plantracker'),
+                _menuItem(context,
+                    icon: 'progress',
+                    text: 'Progress',
+                    navigator: ProgressPage()),
+                _menuItem(context,
+                    icon: 'material',
+                    text: 'Material',
+                    navigator: MyMaterialPage()),
+                _menuItem(context,
+                    icon: 'my_environment',
+                    text: 'My environment',
+                    navigator: MyEnvironmentPage()),
+                _menuItem(context,
+                    icon: 'plantracker',
+                    text: 'Plantracker',
+                    navigator: PlanTrackerPage()),
+                _menuItem(context,
+                    icon: 'logout', text: 'Logout', logout: true),
               ],
             ),
           ),
@@ -75,26 +93,41 @@ class AccountPage extends StatelessWidget {
     );
   }
 
-  Widget _menuItem({
-    IconData icon,
+  Widget _menuItem(
+    BuildContext context, {
+    String icon,
     String text,
+    bool logout = false,
+    dynamic navigator,
   }) {
-    return Container(
-      height: 50,
-      margin: EdgeInsets.symmetric(horizontal: 15).copyWith(bottom: 10),
-      padding: EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Color(0xffF2F6FB),
-      ),
-      child: Row(
-        children: <Widget>[
-          Icon(icon, size: 20),
-          SizedBox(width: 5),
-          Text(text),
-          Spacer(),
-          Icon(LineAwesomeIcons.angle_right, size: 20),
-        ],
+    return GestureDetector(
+      onTap: () {
+        if (logout)
+          return;
+
+        /// [todo] Implement logout.
+        else
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => navigator,
+          ));
+      },
+      child: Container(
+        height: 50,
+        margin: EdgeInsets.symmetric(horizontal: 15).copyWith(bottom: 10),
+        padding: EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          color: Color(0xffF2F6FB),
+        ),
+        child: Row(
+          children: <Widget>[
+            Image.asset('assets/$icon.png', width: 22),
+            SizedBox(width: 8),
+            Text(text),
+            Spacer(),
+            Icon(LineAwesomeIcons.angle_right, size: 20),
+          ],
+        ),
       ),
     );
   }
