@@ -1,4 +1,5 @@
 import 'package:Edudito/helpers/provider.dart';
+import 'package:Edudito/helpers/style_guide.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -30,7 +31,8 @@ class _MyAppState extends State<MyApp> {
       value: provider,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'Poppins'),
+        theme: ThemeData(
+            fontFamily: 'Poppins', primaryColor: StyleGuide.mainColor),
         routes: {
           '/': (context) => SplashScreen(),
         },
