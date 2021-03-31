@@ -39,6 +39,13 @@ dependencies:
   fl_chart: ^0.30.0
 
 dev_dependencies:
+  flutter_launcher_icons: "^0.8.0"
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/edudito.jpeg"
+
   flutter_test:
     sdk: flutter
 
