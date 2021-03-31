@@ -84,16 +84,17 @@ class AddEnvironmentPage extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 22),
-                // Container(
-                //   alignment: Alignment.topLeft,
-                //   child: Text(
-                //     'A',
-                //     style: TextStyle(
-                //       color: StyleGuide.mainColor,
-                //       fontSize: 17,
-                //     ),
-                //   ),
-                // ),
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Next, add your materials',
+                    style: TextStyle(
+                      color: StyleGuide.mainColor,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
               ],
             ),
           ),
