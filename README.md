@@ -82,3 +82,10 @@ courses by engaging in real life. Besides, learners will find it more exciting a
 an interactive environment. Edudito would therefore enable learners to acknowledge, realize and practice
 interactive courses. It grabs the attention of learners, makes them more interested in learning.
 
+# Steps to use the app 
+Just download the apk from [here](https://github.com/Waelahmed99/Edudito/releases/tag/0.1)
+
+# Steps to run the code 
+- Clone the code
+- Open it in VScode or android studio / Intelij
+- Run the code
