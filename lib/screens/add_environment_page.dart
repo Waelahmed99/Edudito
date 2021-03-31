@@ -124,6 +124,14 @@ class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
                   ),
                 ),
                 SizedBox(height: 5),
+                Text(
+                  'You can choose between several material types, links, documents, videos or AR. You can either upload a document or provide a link from article or cloud.\n',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    color: Colors.black45,
+                    fontSize: 13,
+                  ),
+                ),
               ],
             ),
           ),
