@@ -73,6 +73,27 @@ class AddEnvironmentPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(height: 12),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      // icon: Icon(Icons.perm_identity),
+                      labelText: 'Environment description',
+                    ),
+                  ),
+                ),
+                SizedBox(height: 22),
+                // Container(
+                //   alignment: Alignment.topLeft,
+                //   child: Text(
+                //     'A',
+                //     style: TextStyle(
+                //       color: StyleGuide.mainColor,
+                //       fontSize: 17,
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ),
