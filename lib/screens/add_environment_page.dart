@@ -11,6 +11,7 @@ class AddEnvironmentPage extends StatefulWidget {
 class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
   int _selectedCategory = -1;
   int _youtubeNums = 1;
+  int _documentNums = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -153,26 +154,39 @@ class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
                       },
                     ),
                   ),
-                SizedBox(height: 12),
-                for (int i = 0; i < _youtubeNums; i++)
+                SizedBox(height: 15),
+                for (int i = 0; i < _documentNums; i++)
                   Container(
                     margin: EdgeInsets.only(bottom: 10),
                     child: TextField(
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         // icon: Icon(Icons.perm_identity),
-                        labelText: 'Youtube url#${i + 1}',
+                        labelText: 'Document url#${i + 1}',
                       ),
                       onSubmitted: (value) {
-                        /// [todo] validate youtube link first.
+                        /// [todo] validate document link first.
                         setState(() {
                           int toAdd = (value.isEmpty ? -1 : 1);
-                          if (toAdd == 1 || (toAdd == -1 && _youtubeNums > 1))
-                            _youtubeNums = _youtubeNums + toAdd;
+                          if (toAdd == 1 || (toAdd == -1 && _documentNums > 1))
+                            _documentNums = _documentNums + toAdd;
                         });
                       },
                     ),
                   ),
+                Container(
+                  margin: EdgeInsets.all(16),
+                  alignment: Alignment.bottomCenter,
+                  padding: EdgeInsets.symmetric(vertical: 15),
+                  decoration: BoxDecoration(
+                    color: Color(0xffFBDF5B),
+                    borderRadius: BorderRadius.circular(25),
+                  ),
+                  child: Text(
+                    'Upload environment',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                  ),
+                ),
               ],
             ),
           ),

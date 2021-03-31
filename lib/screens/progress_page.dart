@@ -1,3 +1,4 @@
+import 'package:Edudito/helpers/line_chart.dart';
 import 'package:Edudito/helpers/style_guide.dart';
 import 'package:flutter/material.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
@@ -46,11 +47,11 @@ class ProgressPage extends StatelessWidget {
               ),
             ),
             SizedBox(height: 12),
-            // Container(
-            //   width: 300,
-            //   height: 170,
-            //   child: LineChartSample2(),
-            // ),
+            Container(
+              width: 300,
+              height: 170,
+              child: LineChartSample2(),
+            ),
             SizedBox(height: 32),
             Container(
               alignment: Alignment.topLeft,
