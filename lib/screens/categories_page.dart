@@ -15,9 +15,8 @@ class CategoriesPage extends StatelessWidget {
       child: Scaffold(
         body: CustomScrollView(
           slivers: [
-            SliverAppBar(
-              elevation: 2.3,
-              title: Hero(
+            SliverToBoxAdapter(
+              child: Hero(
                 child: Image.asset('assets/$name.png'),
                 tag: name,
               ),
@@ -29,8 +28,9 @@ class CategoriesPage extends StatelessWidget {
                   if (snap.connectionState == ConnectionState.waiting) {
                     //todo handle state
                     return SliverToBoxAdapter(
-                        child:
-                            CircularProgressIndicator()); //todo set progress bar
+                        child: Center(
+                      child: CircularProgressIndicator(),
+                    )); //todo set progress bar
                   }
                   if (snap.hasData == null) {
                     return SliverToBoxAdapter(child: Container());
