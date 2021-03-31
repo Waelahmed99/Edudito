@@ -1,4 +1,5 @@
 import 'package:Edudito/screens/account_page.dart';
+import 'package:Edudito/screens/add_environment_page.dart';
 import 'package:Edudito/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -21,15 +22,18 @@ class _PagesState extends State<Pages> {
 
   void changePage(int idx) {
     setState(() {
+      if (idx == 1) {
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (context) => AddEnvironmentPage(),
+          ),
+        );
+        return;
+      }
       _currentIdx = idx;
       switch (_currentIdx) {
         case 0:
           _body = HomePage();
-          break;
-        case 1:
-
-          /// [todo] add add effect.
-          print('Add button pressed');
           break;
         case 2:
           _body = AccountPage();
