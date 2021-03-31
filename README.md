@@ -1,8 +1,9 @@
 # Edudito
 
-<div style="text-align:center">
-<img src="https://user-images.githubusercontent.com/50237142/113069791-612d3380-91c1-11eb-8f95-acca29ef8d29.jpeg" align="center"/>
-</div>
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/50237142/113069791-612d3380-91c1-11eb-8f95-acca29ef8d29.jpeg" alt="Edudito logo"/>
+</p>
+
 
 Edudito is an education platform for students, teachers, and enthusiastic learners.  
 Due to covid-19 disease, students -specially elementary grade- were unable to have an educational environment in schools.  
