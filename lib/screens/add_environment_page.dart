@@ -10,6 +10,7 @@ class AddEnvironmentPage extends StatefulWidget {
 
 class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
   int _selectedCategory = -1;
+  int _youtubeNums = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +133,26 @@ class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
                     fontSize: 13,
                   ),
                 ),
+                SizedBox(height: 7),
+                for (int i = 0; i < _youtubeNums; i++)
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        // icon: Icon(Icons.perm_identity),
+                        labelText: 'Youtube url#${i + 1}',
+                      ),
+                      onSubmitted: (value) {
+                        /// [todo] validate youtube link first.
+                        setState(() {
+                          int toAdd = (value.isEmpty ? -1 : 1);
+                          if (toAdd == 1 || (toAdd == -1 && _youtubeNums > 1))
+                            _youtubeNums = _youtubeNums + toAdd;
+                        });
+                      },
+                    ),
+                  ),
               ],
             ),
           ),
