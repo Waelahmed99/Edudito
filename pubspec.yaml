@@ -36,8 +36,10 @@ dependencies:
   flutter_svg: ^0.19.3
   flutter_rating_bar: ^4.0.0
   line_awesome_flutter: ^1.0.1
-  fl_chart: ^0.30.0
-  
+  fl_chart: ^0.12.3
+  firebase_storage: ^7.0.0
+  arcore_flutter_plugin: ^0.0.10
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
