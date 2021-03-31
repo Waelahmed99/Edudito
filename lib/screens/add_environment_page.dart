@@ -153,6 +153,26 @@ class _AddEnvironmentPageState extends State<AddEnvironmentPage> {
                       },
                     ),
                   ),
+                SizedBox(height: 12),
+                for (int i = 0; i < _youtubeNums; i++)
+                  Container(
+                    margin: EdgeInsets.only(bottom: 10),
+                    child: TextField(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        // icon: Icon(Icons.perm_identity),
+                        labelText: 'Youtube url#${i + 1}',
+                      ),
+                      onSubmitted: (value) {
+                        /// [todo] validate youtube link first.
+                        setState(() {
+                          int toAdd = (value.isEmpty ? -1 : 1);
+                          if (toAdd == 1 || (toAdd == -1 && _youtubeNums > 1))
+                            _youtubeNums = _youtubeNums + toAdd;
+                        });
+                      },
+                    ),
+                  ),
               ],
             ),
           ),
