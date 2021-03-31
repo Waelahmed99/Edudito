@@ -28,11 +28,52 @@ class AddEnvironmentPage extends StatelessWidget {
         ),
       ),
       body: Container(
+        width: MediaQuery.of(context).size.width,
         child: SingleChildScrollView(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             child: Column(
-              children: [],
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Text(
+                    'Describe your environment',
+                    style: TextStyle(
+                      color: StyleGuide.mainColor,
+                      fontSize: 17,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 5),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: 200,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.circular(25),
+                    // image: DecorationImage(
+                    //   fit: BoxFit.cover,
+                    //   image: AssetImage('assets/placeholder.jpg'),
+                    // ),
+                  ),
+                  child: Text(
+                    'Pick environment\'s image',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+                SizedBox(height: 12),
+                Container(
+                  child: TextField(
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      // icon: Icon(Icons.perm_identity),
+                      labelText: 'Environment name',
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
